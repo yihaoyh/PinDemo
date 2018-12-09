@@ -23,14 +23,17 @@ android {
 
     sourceSets {
         main {
-            manifest.srcFile 'src/main/AndroidManifest.xml'
+//            manifest.srcFile 'src/main/AndroidManifest.xml'
 //            java.srcDirs = ['src']
 //            resources.srcDirs = ['src']
 //            aidl.srcDirs = ['src']
 //            renderscript.srcDirs = ['src']
 //            res.srcDirs = ['src/main/res-main']
 //            assets.srcDirs = ['assets']
-            file('src/main/res-main').listFiles().each { res.srcDirs += it.path }
+            file('src/main/res-main').listFiles().each {
+                    println(it.path)
+                    res.srcDirs += it.path
+            }
         }
     }
 }

@@ -30,7 +30,7 @@ class MainActivity : Activity() {
                 super.onPageFinished(view, url)
                 Log.v(TAG, url)
                 if (url!!.startsWith("https://com.yihao.test")) {
-                    var index = url!!.indexOf("code=")
+                    var index = url.indexOf("code=")
                     var code = url.substring(index + 5, url.length)
                     Log.v(TAG, "code:$code")
                     var intent = Intent()
