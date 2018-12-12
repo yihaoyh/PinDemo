@@ -59,4 +59,5 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.8.0") {
         exclude group: "com.android.support"
     }
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
 }

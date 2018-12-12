@@ -1,8 +1,12 @@
 package com.yihao.pinterestdemo.httpservices;
 
 import android.text.TextUtils;
+import android.util.Log;
 import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.yihao.pinterestdemo.MainActivity;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import org.json.JSONException;
@@ -13,6 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
@@ -42,9 +47,14 @@ public class PinConverterFactory extends Converter.Factory {
     private static class PinResponseConverter<T> implements Converter<ResponseBody, T> {
 
         private Type type;
+        private TypeAdapter<T> adapter;
 
         public PinResponseConverter(Type type) {
+            if(null == type) {
+                throw new IllegalArgumentException("type is null");
+            }
             this.type = type;
+            adapter = (TypeAdapter<T>) new Gson().getAdapter(TypeToken.get(type));
         }
 
         @Override
@@ -54,11 +64,17 @@ public class PinConverterFactory extends Converter.Factory {
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     if(jsonObject.has("data")){
-                        T obj = new Gson().fromJson(jsonObject.getString("data"), type);
+                        Log.d(MainActivity.TAG, jsonObject.getString("data"));
+//                        JsonReader reader = new JsonReader(new StringReader(jsonObject.getString("data")));
+//                        T obj = adapter.read(reader);
+                        T obj = new Gson().fromJson(jsonObject.getString("data"), TypeToken.get(type).getType());
                         return obj;
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                }
+                finally {
+                    value.close();
                 }
             }
             return null;

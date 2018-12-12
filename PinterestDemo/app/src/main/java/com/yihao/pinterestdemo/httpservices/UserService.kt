@@ -3,6 +3,7 @@ package com.yihao.dribbbledemo.httpservices
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.yihao.pinterestdemo.dto.User
 import com.yihao.pinterestdemo.Constants
+import com.yihao.pinterestdemo.dto.Board
 import com.yihao.pinterestdemo.httpservices.PinConverterFactory
 import io.reactivex.Observable
 import retrofit2.Retrofit
@@ -23,6 +24,10 @@ interface UserService {
     @GET("v1/me")
     fun getCurrentUser(@Query("access_token") accessToken: String, @Query("fields") fields:String
      ="username, id, image"):Observable<User>
+
+    @GET("/v1/me/boards")
+    fun getMyBoards(@Query("access_token") accessToken: String, @Query("fields") fields: String
+    ="id, name, counts, image"):Observable<List<Board>>
 
     companion object Factory {
         fun create(): UserService {
