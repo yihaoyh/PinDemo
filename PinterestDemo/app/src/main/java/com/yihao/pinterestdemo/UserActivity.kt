@@ -1,15 +1,12 @@
 package com.yihao.pinterestdemo
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.yihao.dribbbledemo.httpservices.LoginService
 import com.yihao.dribbbledemo.httpservices.UserService
-import com.yihao.pinterestdemo.MainActivity.Companion.TAG
 import com.yihao.pinterestdemo.dto.Board
 import com.yihao.pinterestdemo.dto.Image
 import com.yihao.pinterestdemo.dto.Token
@@ -18,8 +15,6 @@ import com.yihao.pinterestdemo.modules.user.BoardFragment
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_user.*
-import kotlinx.android.synthetic.main.item_board.*
 
 class UserActivity : FragmentActivity() {
 
@@ -34,8 +29,8 @@ class UserActivity : FragmentActivity() {
         boardsFragment = BoardFragment()
         supportFragmentManager.beginTransaction().replace(R.id.board_container, boardsFragment!!).commit()
         boardsFragment!!.setBoards(makeTestBoards())
-//        var code = intent.getStringExtra("code")
-//        getUser(code)
+        var code = intent.getStringExtra("code")
+        getUser(code)
 
 
     }
@@ -53,7 +48,6 @@ class UserActivity : FragmentActivity() {
     }
 
     private fun getUser(code: String) {
-        val userService = UserService.create()
         val loginService = LoginService.create()
         loginService.getToken(
             clientId = Constants.CLIENT_ID,
@@ -62,20 +56,6 @@ class UserActivity : FragmentActivity() {
             .subscribe { token: Token ->
                 getUserData(token.access_token)
             }
-//            .flatMap { token: Token ->
-//                Log.d(TAG, "access_token ${token.access_token}")
-//                getSharedPreferences("http_preference", Context.MODE_PRIVATE).edit().putString("access_token",
-//                    token.access_token).commit()
-//                userService.getCurrentUser(token.access_token)
-//            }.observeOn(Schedulers.newThread()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-//            .subscribe ({ response ->
-//                Log.d(TAG, response.toString())
-//                tvName?.text = response.username
-//                Glide.with(this@UserActivity).load(response.image["60x60"]?.url).into(ivAvatar!!)
-//            }, {
-//                it.printStackTrace()
-//                Toast.makeText(this@UserActivity, "获取用户信息失败", Toast.LENGTH_SHORT).show()
-//            })
     }
 
     private fun getUserData(accessToken: String) {
