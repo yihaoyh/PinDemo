@@ -65,10 +65,7 @@ public class PinConverterFactory extends Converter.Factory {
                     JSONObject jsonObject = new JSONObject(result);
                     if(jsonObject.has("data")){
                         Log.d(MainActivity.TAG, jsonObject.getString("data"));
-//                        JsonReader reader = new JsonReader(new StringReader(jsonObject.getString("data")));
-//                        T obj = adapter.read(reader);
-                        T obj = new Gson().fromJson(jsonObject.getString("data"), TypeToken.get(type).getType());
-                        return obj;
+                        return new Gson().fromJson(jsonObject.getString("data"), TypeToken.get(type).getType());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -30,10 +30,10 @@ class MainActivity : Activity() {
                 super.onPageFinished(view, url)
                 Log.v(TAG, url)
                 if (url!!.startsWith("https://com.yihao.test")) {
-                    var index = url.indexOf("code=")
-                    var code = url.substring(index + 5, url.length)
+                    val index = url.indexOf("code=")
+                    val code = url.substring(index + 5, url.length)
                     Log.v(TAG, "code:$code")
-                    var intent = Intent()
+                    val intent = Intent()
                     intent.putExtra("code", code)
                     intent.setClass(this@MainActivity, UserActivity::class.java)
                     startActivity(intent)

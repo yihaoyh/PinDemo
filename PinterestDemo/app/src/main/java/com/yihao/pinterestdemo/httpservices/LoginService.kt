@@ -1,4 +1,4 @@
-package com.yihao.dribbbledemo.httpservices
+package com.yihao.pinterestdemo.httpservices
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.yihao.pinterestdemo.dto.Token

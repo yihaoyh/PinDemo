@@ -1,10 +1,9 @@
-package com.yihao.dribbbledemo.httpservices
+package com.yihao.pinterestdemo.httpservices
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.yihao.pinterestdemo.dto.User
 import com.yihao.pinterestdemo.Constants
 import com.yihao.pinterestdemo.dto.Board
-import com.yihao.pinterestdemo.httpservices.PinConverterFactory
 import io.reactivex.Observable
 import retrofit2.Retrofit
 import retrofit2.http.GET

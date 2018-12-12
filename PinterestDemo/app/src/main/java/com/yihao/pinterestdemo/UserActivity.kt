@@ -5,8 +5,8 @@ import android.support.v4.app.FragmentActivity
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.yihao.dribbbledemo.httpservices.LoginService
-import com.yihao.dribbbledemo.httpservices.UserService
+import com.yihao.pinterestdemo.httpservices.LoginService
+import com.yihao.pinterestdemo.httpservices.UserService
 import com.yihao.pinterestdemo.dto.Board
 import com.yihao.pinterestdemo.dto.Image
 import com.yihao.pinterestdemo.dto.Token
@@ -29,14 +29,14 @@ class UserActivity : FragmentActivity() {
         boardsFragment = BoardFragment()
         supportFragmentManager.beginTransaction().replace(R.id.board_container, boardsFragment!!).commit()
         boardsFragment!!.setBoards(makeTestBoards())
-        var code = intent.getStringExtra("code")
+        val code = intent.getStringExtra("code")
         getUser(code)
 
 
     }
 
     private fun makeTestBoards(): MutableList<Board> {
-        var boards: MutableList<Board> = ArrayList()
+        val boards: MutableList<Board> = ArrayList()
         boards.add(Board("0", "test1", Image("", 0, 0)))
         boards.add(Board("1", "test2", Image("", 0, 0)))
         boards.add(Board("2", "test3", Image("", 0, 0)))
